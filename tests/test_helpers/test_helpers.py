@@ -34,6 +34,9 @@ def data_for_invalid_brightness_levels():
             (
                 random_data.random_invalid_brightness_greater_than_max_val(),
                 random_data.random_invalid_brightness_lower_than_min_val(),
+                "",
+                random_data.random_name(),
+                None
              ),
         ]
     )
