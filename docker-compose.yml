@@ -1,17 +1,25 @@
 version: '3.8'
 
 services:
-  # pytest:
-  #   build: .
-  #   command: pytest 
-  #   volumes:
-  #     - ./logs:/app/logs:rw  
-  #     - ./reports:/app/reports:rw 
+  pytest:
+    build: 
+      context: ./
+      dockerfile: ./dockerfiles/tests/Dockerfile
+    depends_on:
+      - appserver
+    command: pytest 
+    volumes:
+      - ./tests/logs:/app/tests/logs:rw  
+      - ./tests/reports:/app/tests/reports:rw
+    environment:
+      - APP_BASE_URL=http://appserver:8080   
   appserver:
-    build: ./app
+    build: 
+      context: ./
+      dockerfile: ./dockerfiles/app/Dockerfile
     ports:
       - "8081:8080"
-    command: python3 -u app.py
+    command: python3 -u ./app/app.py
     
 
 
