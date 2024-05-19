@@ -1,5 +1,7 @@
+import json
 import random
 import requests
+from urllib.parse import urlencode
 from tests.utils.utils import log_request, log_response
 from tests.random_data.random_data import RandomDataGenerator
 
@@ -24,6 +26,12 @@ class DeviceAPIClient:
             else {"Content-Type": "application/x-www-form-urlencoded"}
         )
         data = {"ip": ip}
+        
+        if content_type == "json":
+            data = json.dumps(data)
+        else:
+            data = urlencode(data)
+
         response = self.session.post(url, data=data, headers=headers, timeout=self.timeout)
         return response
 
@@ -40,6 +48,10 @@ class DeviceAPIClient:
             else {"Content-Type": "application/x-www-form-urlencoded"}
         )
         data = {"brightness": value}
+        if content_type == "json":
+            data = json.dumps(data)
+        else:
+            data = urlencode(data)
         response = self.session.post(url, data=data, headers=headers, timeout=self.timeout)
         return response
 
@@ -51,6 +63,10 @@ class DeviceAPIClient:
             else {"Content-Type": "application/x-www-form-urlencoded"}
         )
         data = {"color": value}
+        if content_type == "json":
+            data = json.dumps(data)
+        else:
+            data = urlencode(data)
         response = self.session.post(url, data=data, headers=headers, timeout=self.timeout)
         return response
 
@@ -62,6 +78,12 @@ class DeviceAPIClient:
             else {"Content-Type": "application/x-www-form-urlencoded"}
         )
         data = {"name": value}
+        
+        if content_type == "json":
+            data = json.dumps(data)
+        else:
+            data = urlencode(data)
+
         response = self.session.post(url, data=data, headers=headers, timeout=self.timeout)
         return response
 
