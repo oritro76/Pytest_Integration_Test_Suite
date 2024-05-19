@@ -1,3 +1,4 @@
+import datetime
 from pathlib import Path
 from loguru import logger
 import pytest
@@ -6,11 +7,6 @@ import logging
 import os
 from pytest_metadata.plugin import metadata_key
 
-# load_env_variables()
-
-# @pytest.hookimpl(tryfirst=True)
-# def pytest_sessionfinish(session, exitstatus):
-#     session.config.stash[metadata_key]["BASE URL"] = BASE_URL
 
 @pytest.fixture
 def caplog(_caplog):
@@ -30,7 +26,7 @@ def write_logs(request):
     # put logs in tests/logs
     postfix_file_name = "..."
     max_file_name_len = 100
-    
+
     ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
     log_path = Path(os.path.join(ROOT_DIR, "logs", "tests"))
 
@@ -57,3 +53,9 @@ def write_logs(request):
     logger.remove()
     logger.configure(handlers=[{"sink": log_path, "level": "TRACE", "mode": "w"}])
     logger.enable("my_package")
+
+def pytest_configure(config):
+    if not config.option.htmlpath:
+        current_datetime = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+        report_filename = f"./tests/reports/report_{current_datetime}.html"
+        config.option.htmlpath = report_filename
