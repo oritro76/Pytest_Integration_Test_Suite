@@ -28,7 +28,6 @@ class RandomDataGenerator:
         # Generating an obviously invalid color code for testing
         return (
                 "00ff00",       # Missing '#'
-                "#0f0",         # Too short
                 "#00ff00ff",    # Too long
                 "#gggggg",      # Invalid characters
                 "",             # Empty string
