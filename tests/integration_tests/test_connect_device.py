@@ -26,7 +26,6 @@ def test_connect_device_invalid_ip(client, random_data, content_type):
 @pytest.mark.parametrize("content_type", ["json", "form"])
 def test_connect_device_to_already_connected_device(client, random_data, content_type):
     ip = client.connect_to_a_random_device()
-    assert_response_success_status(response, success=True)
 
     response = client.connect_device(ip, content_type)
     assert_response_success_status(response, success=False)
