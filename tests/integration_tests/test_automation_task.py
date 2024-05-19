@@ -25,7 +25,7 @@ def test_automation_task(client):
 
 
 @pytest.mark.smoke
-@pytest.mark.parametrize("initial_brightness_level", [10.0, 1.0, 5.0])
+@pytest.mark.parametrize("initial_brightness_level", [10.0, 1.0, CHILLTIME_FINAL_BRIGHTNESS, 5.0])
 def test_automation_task_with_different_brightness_level(
     client, initial_brightness_level
 ):

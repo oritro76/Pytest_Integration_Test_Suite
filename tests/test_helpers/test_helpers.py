@@ -1,14 +1,16 @@
 import pytest
+from typing import List, Tuple, Any, Generator, Union
+from requests import Response
 from tests.random_data.random_data import RandomDataGenerator
 from tests.utils.utils import generate_combinations
 
 
-def assert_response_success_status(response, success=True):
+def assert_response_success_status(response: Response, success: bool = True) -> None:
     assert response.status_code == 200
     isSuccess = response.json()
     assert isSuccess.get("success") == success
 
-def data_for_invalid_names():
+def data_for_invalid_names() -> Generator[Tuple[str, Union[str, None, int]], None, None]:
     random_data = RandomDataGenerator()
     return generate_combinations(
         [
@@ -17,7 +19,7 @@ def data_for_invalid_names():
         ]
     )
 
-def data_for_invalid_colors():
+def data_for_invalid_colors() -> List[Tuple[Any, ...]]:
     random_data = RandomDataGenerator()
     return generate_combinations(
         [
@@ -26,7 +28,7 @@ def data_for_invalid_colors():
         ]
     )
 
-def data_for_invalid_brightness_levels():
+def data_for_invalid_brightness_levels() -> List[Tuple[Any, ...]]:
     random_data = RandomDataGenerator()
     return generate_combinations(
         [
@@ -41,7 +43,7 @@ def data_for_invalid_brightness_levels():
         ]
     )
 
-def validate_response(model, response):
+def validate_response(model: Any, response: Response) -> Any:
     try:
         return model.model_validate(response.json())
     except Exception as e:

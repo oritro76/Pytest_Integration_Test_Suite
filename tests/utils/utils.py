@@ -1,19 +1,9 @@
-from typing import Any
-
+from typing import Any, List, Tuple
 from itertools import product
 from loguru import logger
-# from dotenv import find_dotenv, load_dotenv
 
 
 def log_request(response: Any, *args: Any, **kwargs: Any) -> None:
-    """
-    Logs the request URL, headers, and body.
-
-    Args:
-        response: The response object containing request information.
-        *args: Additional arguments (unused in this function).
-        **kwargs: Additional keyword arguments (unused in this function).
-    """
 
     logger.debug(f"Request: {response.request.method} {response.request.url}")
     logger.debug(f"Headers: {response.request.headers}")
@@ -21,20 +11,11 @@ def log_request(response: Any, *args: Any, **kwargs: Any) -> None:
 
 
 def log_response(response: Any, *args: Any, **kwargs: Any) -> None:
-    """
-    Logs the response status code, headers, and body.
-
-    Args:
-        response: The response object containing response information.
-        *args: Additional arguments (unused in this function).
-        **kwargs: Additional keyword arguments (unused in this function).
-    """
 
     logger.debug(f"Response Status Code: {response.status_code}")
     logger.debug(f"Response Headers: {response.headers}")
     logger.debug(f"Response Body: {response.text}")
 
-def generate_combinations(tuple_list):
-    # Use itertools.product to generate the Cartesian product of the tuples
-    return list(product(*tuple_list))
+def generate_combinations(tuple_list: List[Tuple[Any, ...]]) -> List[Tuple[Any, ...]]:
 
+    return list(product(*tuple_list))
