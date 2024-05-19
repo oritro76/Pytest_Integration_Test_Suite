@@ -27,3 +27,7 @@ def test_get_state(client):
 def test_get_state_without_connecting_to_a_device(client):
     response = client.get_device_state()
     assert_response_success_status(response, success=False)
+
+def test_get_state_with_invalid_body(client, random_data):
+    response = client.get_device_state(data=random_data.random_json())
+    assert response.status_code == 400
