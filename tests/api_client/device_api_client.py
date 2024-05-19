@@ -5,14 +5,15 @@ from tests.random_data.random_data import RandomDataGenerator
 
 
 class DeviceAPIClient:
-    def __init__(self, base_url):
+    def __init__(self, base_url, timeout=10):
         self.base_url = base_url
         self.session = requests.Session()
+        self.timeout = timeout
         self.session.hooks["response"] = [log_request, log_response]
 
     def list_devices(self):
         url = f"{self.base_url}/devices"
-        response = self.session.get(url)
+        response = self.session.get(url, timeout=self.timeout)
         return response
 
     def connect_device(self, ip, content_type="json"):
@@ -23,7 +24,7 @@ class DeviceAPIClient:
             else {"Content-Type": "application/x-www-form-urlencoded"}
         )
         data = {"ip": ip}
-        response = self.session.post(url, data=data, headers=headers)
+        response = self.session.post(url, data=data, headers=headers, timeout=self.timeout)
         return response
 
     def get_device_state(self):
@@ -39,7 +40,7 @@ class DeviceAPIClient:
             else {"Content-Type": "application/x-www-form-urlencoded"}
         )
         data = {"brightness": value}
-        response = self.session.post(url, data=data, headers=headers)
+        response = self.session.post(url, data=data, headers=headers, timeout=self.timeout)
         return response
 
     def set_color(self, value, content_type="json"):
@@ -50,7 +51,7 @@ class DeviceAPIClient:
             else {"Content-Type": "application/x-www-form-urlencoded"}
         )
         data = {"color": value}
-        response = self.session.post(url, data=data, headers=headers)
+        response = self.session.post(url, data=data, headers=headers, timeout=self.timeout)
         return response
 
     def set_name(self, value, content_type="json"):
@@ -61,17 +62,17 @@ class DeviceAPIClient:
             else {"Content-Type": "application/x-www-form-urlencoded"}
         )
         data = {"name": value}
-        response = self.session.post(url, data=data, headers=headers)
+        response = self.session.post(url, data=data, headers=headers, timeout=self.timeout)
         return response
 
     def execute_automation_task(self):
         url = f"{self.base_url}/chilltime"
-        response = self.session.post(url)
+        response = self.session.post(url, timeout=self.timeout)
         return response
 
     def disconnect_device(self):
         url = f"{self.base_url}/disconnect"
-        response = self.session.post(url)
+        response = self.session.post(url, timeout=self.timeout)
         return response
     
     def get_random_connected_device(self):
