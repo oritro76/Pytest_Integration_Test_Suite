@@ -1,3 +1,4 @@
+import pytest
 from tests.random_data.random_data import RandomDataGenerator
 from tests.utils.utils import generate_combinations
 
@@ -36,3 +37,9 @@ def data_for_invalid_brightness_levels():
              ),
         ]
     )
+
+def validate_response(model, response):
+    try:
+        return model.model_validate(response.json())
+    except Exception as e:
+        pytest.fail(f"Response validation failed: {e}")
