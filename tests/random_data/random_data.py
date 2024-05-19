@@ -16,7 +16,7 @@ class RandomDataGenerator:
         return (
                 "",
                 None,
-                "a" * 256,
+                self.faker.pystr(min_chars=500, max_chars=600),
                 "name_with_special_chars!@#",
                 12345,
             )
@@ -31,9 +31,11 @@ class RandomDataGenerator:
                 "#00ff00ff",    # Too long
                 "#gggggg",      # Invalid characters
                 "",             # Empty string
+                self.faker.pystr(min_chars=5, max_chars=10), 
                 None,           # None value
                 "#00ff0@",      # Special characters
-                "#00ff"         # Incorrect length
+                "#00ff",         # Incorrect length
+                self.faker.pyint(),
             )
 
     def random_brightness(self):
@@ -48,4 +50,7 @@ class RandomDataGenerator:
     def random_invalid_brightness_lower_than_min_val(self):
         # Generating an invalid brightness value for testing
         return -self.faker.pyfloat(right_digits=2, min_value=0, max_value=100)
+    
+    def random_json(self):
+        return self.faker.json()
 
