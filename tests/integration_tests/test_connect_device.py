@@ -1,23 +1,29 @@
 import pytest
-from tests.test_helpers.test_helpers import assert_response_success_status
+from tests.models.response_models import GenericIsSuccessResponse
+from tests.test_helpers.test_helpers import (
+    assert_response_success_status,
+    validate_response,
+)
+
 
 @pytest.mark.smoke
-@pytest.mark.parametrize("content_type", ['json', 'form'])
+@pytest.mark.parametrize("content_type", ["json", "form"])
 def test_connect_device(client, random_data, content_type):
     device = client.get_random_connected_device()
     device_ip = device.get("ip")
     response = client.connect_device(device_ip, content_type)
+    validate_response(model=GenericIsSuccessResponse, response=response)
     assert_response_success_status(response)
 
 
-@pytest.mark.parametrize("content_type", ['json', 'form'])
+@pytest.mark.parametrize("content_type", ["json", "form"])
 def test_connect_device_invalid_ip(client, random_data, content_type):
     ip = random_data.random_private_ip()
     response = client.connect_device(ip, content_type)
     assert_response_success_status(response, success=False)
 
 
-@pytest.mark.parametrize("content_type", ['json', 'form'])
+@pytest.mark.parametrize("content_type", ["json", "form"])
 def test_connect_device_to_already_connected_device(client, random_data, content_type):
     ip = client.connect_to_a_random_device()
     assert_response_success_status(response, success=True)
