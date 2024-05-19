@@ -13,9 +13,12 @@ class DeviceAPIClient:
         self.timeout = timeout
         self.session.hooks["response"] = [log_request, log_response]
 
-    def list_devices(self):
+    def list_devices(self, data=None, params=None):
+        headers = None
         url = f"{self.base_url}/devices"
-        response = self.session.get(url, timeout=self.timeout)
+        if data is not None:
+            headers = {"Content-Type": "application/json"}
+        response = self.session.get(url, headers=headers, data=data, params=params)
         return response
 
     def connect_device(self, ip, content_type="json"):
@@ -35,9 +38,13 @@ class DeviceAPIClient:
         response = self.session.post(url, data=data, headers=headers, timeout=self.timeout)
         return response
 
-    def get_device_state(self):
+    def get_device_state(self, data=None, params=None):
+        headers = None
         url = f"{self.base_url}/state"
-        response = self.session.get(url)
+        if data is not None:
+            headers = {"Content-Type": "application/json"}
+        response = self.session.get(url, headers=headers, data=data, params=params)
+
         return response
 
     def set_brightness(self, value, content_type="json"):
@@ -114,7 +121,7 @@ class DeviceAPIClient:
     def get_specific_state(self, state_name="brightness"):
         response = self.get_device_state()
         device_states = (response.json())
-        state = device_states.get(state_name)
+        state = device_states[state_name]
 
         return state
     
