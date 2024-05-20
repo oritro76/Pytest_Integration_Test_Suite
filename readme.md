@@ -87,7 +87,7 @@ The test suite is modular, with each test file focusing on specific functionalit
 - POST /chilltime API: Chilltime API should mentions how the brightness will decrease untill it reaches the 30% in the specs.
 
 ### Bugs and Testcases
-- Bugs are in bugs.md file
+- 5 Bugs are reported in bugs.md file
 - Testcases are in testcases.md file
 
 ## Running the Tests
@@ -97,6 +97,8 @@ To run the test suite, use the following command:
 docker compose build
 docker compose up
 ```
+
+Currently only the 16 smoke tests will run. To run all the 70 tests remove `-m smoke` from the docker compose file and run the above commands. To see the reports go to `/tests/reports/` directory.
 
 ## Additional Testing Techniques
 - Load Testing: Ensure the application can handle a large number of requests and connected devices simultaneously.
