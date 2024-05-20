@@ -72,11 +72,11 @@ The test suite is modular, with each test file focusing on specific functionalit
 - Isolation: Tests are isolated from each other, ensuring that they do not interfere with one another and providing reliable test results.
 - Logging and Debugging: All APIs requests and responses are logged for better debuggin purpose
 
-- Dockerization: Two docker containers are used for test execution. One to have light bulb web server and another to execute the tests.
-
-- Parallel test executions: Pytest-xdist is used for parallel test execuations. Currently 2 workers are used. 
+- Dockerization: Two docker containers are used for test execution. One to have light bulb web server and another to execute the tests. 
 
 - Reporting: Reporting with pytest-html generates comprehensive HTML reports with detailed test information, provides a user-friendly visual representation of test results, allows inclusion of additional information in the report, links test cases with specific issues or requirements, and enables storage and analysis of historical test results.
+
+- Marker: One test marker SMOKE is introduced for running the smoke tests.
 
 ## Points for discussion:
 
@@ -84,7 +84,7 @@ The test suite is modular, with each test file focusing on specific functionalit
 
 - POST /color API: Color param should accept 6 hex digits. Currently it accepts invalid hex digits also. Tests have been implemented for these checks and they are failing.
 
-- POST /chilltime API: Chilltime API should mentions how the brightness will decrease untill it reaches the 30%. Currently it is random.
+- POST /chilltime API: Chilltime API should mentions how the brightness will decrease untill it reaches the 30% in the specs.
 
 ### Bugs and Testcases
 - Bugs are in bugs.md file
