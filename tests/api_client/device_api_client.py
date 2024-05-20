@@ -5,6 +5,7 @@ from typing import Optional, Dict, Any
 from urllib.parse import urlencode
 from requests import Response
 from tests.utils.utils import log_request, log_response
+from tests.test_helpers.test_helpers import assert_response_success_status
 from tests.random_data.random_data import RandomDataGenerator
 
 
@@ -100,34 +101,43 @@ class DeviceAPIClient:
         response = self.session.post(url, timeout=self.timeout)
         return response
 
-    def disconnect_device(self) -> Response:
+    def disconnect_device(self, data:dict=None) -> Response:
         url = f"{self.base_url}/disconnect"
-        response = self.session.post(url, timeout=self.timeout)
+        headers = {"Content-Type": "application/json"}
+        response = self.session.post(url, headers=headers, data=data, timeout=self.timeout)
         return response
     
     def get_random_connected_device(self) -> Dict[str, Any]:
         response = self.list_devices()
+        assert response.status_code == 200
         print(response.json())
         device_list = response.json()
+
         device = random.choice(device_list)
         return device
 
     def connect_to_a_random_device(self) -> str:
         device = self.get_random_connected_device()
         device_ip = device.get("ip")
-        self.connect_device(ip=device_ip)
+        response = self.connect_device(ip=device_ip)
+        assert_response_success_status(response)
 
         return device_ip
     
     def get_specific_state(self, state_name: str = "brightness") -> Any:
         response = self.get_device_state()
+
+        assert response.status_code == 200
+
         device_states = response.json()
         state = device_states[state_name]
 
         return state
     
     def get_brightness_after_chilltime(self) -> float:
-        self.execute_automation_task()
+        response = self.execute_automation_task()
+        assert_response_success_status(response)
+
         brightness_level = self.get_specific_state('brightness')
 
         return brightness_level
