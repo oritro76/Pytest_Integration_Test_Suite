@@ -7,7 +7,7 @@ services:
       dockerfile: ./dockerfiles/tests/Dockerfile
     depends_on:
       - appserver
-    command: pytest 
+    command: pytest -m smoke
     volumes:
       - ./tests/logs:/app/tests/logs:rw  
       - ./tests/reports:/app/tests/reports:rw
