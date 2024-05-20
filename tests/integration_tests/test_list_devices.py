@@ -1,4 +1,3 @@
-import json
 import pytest
 from tests.test_helpers.test_helpers import validate_response
 from tests.models.response_models import DevicesResponse
@@ -20,8 +19,6 @@ def test_list_devices(client):
         assert device.get("ip") is not None
 
 
-
 def test_list_devices_with_invalid_body(client, random_data):
     response = client.list_devices(data=random_data.random_json())
     assert response.status_code == 400
-
