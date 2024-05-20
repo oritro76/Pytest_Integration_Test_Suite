@@ -110,7 +110,6 @@ class DeviceAPIClient:
     def get_random_connected_device(self) -> Dict[str, Any]:
         response = self.list_devices()
         assert response.status_code == 200
-        print(response.json())
         device_list = response.json()
 
         device = random.choice(device_list)
