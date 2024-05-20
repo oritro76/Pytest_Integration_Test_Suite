@@ -26,6 +26,7 @@ Verify the response contains the device's name, IP, color, and brightness.
 Negative Scenarios:
 
 Attempt to retrieve the state without connecting to any device.
+Attempt to retrieve the state after disconnecting to any device.
 Verify the response status code is 200 but the response contains "success": false.
 4. Set the Brightness of a Device: POST /brightness
 Positive Scenarios:
