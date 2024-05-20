@@ -5,9 +5,11 @@ from tests.models.response_models import DevicesResponse
 
 @pytest.mark.smoke
 def test_list_devices(client):
+    #act
     response = client.list_devices()
-    assert response.status_code == 200
 
+    #assert
+    assert response.status_code == 200
     validate_response(model=DevicesResponse, response=response)
 
     devices = response.json()
@@ -20,5 +22,8 @@ def test_list_devices(client):
 
 
 def test_list_devices_with_invalid_body(client, random_data):
+    #act
     response = client.list_devices(data=random_data.random_json())
+
+    #assert
     assert response.status_code == 400

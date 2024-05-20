@@ -9,13 +9,17 @@ from tests.device_settings.settings import CHILLTIME_FINAL_BRIGHTNESS
 
 @pytest.mark.smoke
 def test_automation_task(client):
+    #arrange
     initial_brightness_level = 9.0
     client.connect_to_a_random_device()
 
     response = client.set_brightness(value=initial_brightness_level)
     assert_response_success_status(response)
 
+    #act
     response = client.execute_automation_task()
+
+    #assert
     validate_response(model=GenericIsSuccessResponse, response=response)
     assert_response_success_status(response)
 
@@ -31,6 +35,7 @@ def test_automation_task(client):
 def test_automation_task_with_different_brightness_level(
     client, initial_brightness_level
 ):
+    #arrange
     final_brightness_level = None
     expected_brightness_level = CHILLTIME_FINAL_BRIGHTNESS
 
@@ -42,15 +47,19 @@ def test_automation_task_with_different_brightness_level(
     if initial_brightness_level <= CHILLTIME_FINAL_BRIGHTNESS:
         expected_brightness_level = initial_brightness_level
 
+    #act
     while initial_brightness_level > CHILLTIME_FINAL_BRIGHTNESS:
         initial_brightness_level = client.get_brightness_after_chilltime()
 
     final_brightness_level = client.get_brightness_after_chilltime()
 
+    #assert
     assert final_brightness_level == expected_brightness_level
 
 
 def test_automation_task_without_connection(client):
-
+    #act
     response = client.execute_automation_task()
+
+    #assert
     assert_response_success_status(response, success=False)
