@@ -1,4 +1,4 @@
-## BUG: GET request for all the APIs with json body returns Internal Server error
+## BUG 1: GET request for all the APIs with json body returns Internal Server error
 
 
 ### Effected API Paths: 
@@ -61,7 +61,7 @@ TypeError: get_device_state() got an unexpected keyword argument &#039;ip&#039;
 </body>
 ```
 
-## BUG: Set Brightness API returns Internal Server error for certain inputs for both content-type
+## BUG 2: Set Brightness API returns Internal Server error for certain inputs for both content-type
 
 ### Values: 
     - Empty string "",
@@ -121,10 +121,10 @@ TypeError: float() argument must be a string or a number, not &#039;NoneType&#03
 ```
 
 
-## BUG: Set Color API returns Internal Server error for certain inputs
+## BUG 3: Set Color API returns Internal Server error for certain inputs
 
 
-### Values: 
+### Values/Content-type: 
     - Random number/json and form
     - null/json
 
@@ -166,7 +166,7 @@ AttributeError: &#039;NoneType&#039; object has no attribute &#039;lstrip&#039;
     </html>
 ```
 
-## BUG: Chilltime automation is not working properly when brightness level is more or less than 30%
+## BUG 4: Chilltime automation is not working properly when brightness level is more or less than 30%
 
 ### Steps when brightness level is above 30%:
 - Connect to a light
@@ -189,3 +189,65 @@ AttributeError: &#039;NoneType&#039; object has no attribute &#039;lstrip&#039;
     Brightness has been increased.
 ### Expected:
     Brightness should not change
+
+## BUG 5: Disconnect API returns Internal Server error for invalid json body
+
+
+### Headers
+```
+{"Content-Type": "application/json"}
+```
+### json request
+```
+{"ip":  "192.168.100.10"}
+```
+
+### response:
+```
+    <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html>
+
+<head>
+    <title>Error: 500 Internal Server Error</title>
+    <style type="text/css">
+        html {
+            background-color: #eee;
+            font-family: sans;
+        }
+
+        body {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 15px;
+        }
+
+        pre {
+            background-color: #eee;
+            border: 1px solid #ddd;
+            padding: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Error: 500 Internal Server Error</h1>
+    <p>Sorry, the requested URL <tt>&#039;http://localhost:8081/disconnect&#039;</tt>
+        caused an error:</p>
+    <pre>Internal Server Error</pre>
+    <h2>Exception:</h2>
+    <pre>TypeError(&quot;disconnect_device() got an unexpected keyword argument &#039;ip&#039;&quot;)</pre>
+    <h2>Traceback:</h2>
+    <pre>Traceback (most recent call last):
+  File &quot;./app/app.py&quot;, line 868, in _handle
+    return route.call(**args)
+  File &quot;./app/app.py&quot;, line 1748, in wrapper
+    rv = callback(*a, **ka)
+  File &quot;./app/app.py&quot;, line 3790, in wrapper
+    result = func(**params)
+TypeError: disconnect_device() got an unexpected keyword argument &#039;ip&#039;
+</pre>
+</body>
+
+</html>
+```
