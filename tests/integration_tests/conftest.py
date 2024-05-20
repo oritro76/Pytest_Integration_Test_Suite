@@ -7,6 +7,7 @@ from tests.settings import APP_BASE_URL
 @pytest.fixture(scope='function')
 def client():
     client = DeviceAPIClient(APP_BASE_URL)
+    client.disconnect_device() 
     yield client
     client.disconnect_device() 
 

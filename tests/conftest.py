@@ -23,10 +23,11 @@ def caplog(_caplog):
 
 @pytest.fixture(autouse=True)
 def write_logs(request):
-    # put logs in tests/logs
+    
     postfix_file_name = "..."
     max_file_name_len = 100
-
+    
+    # put logs in tests/logs
     ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
     log_path = Path(os.path.join(ROOT_DIR, "logs", "tests"))
 
