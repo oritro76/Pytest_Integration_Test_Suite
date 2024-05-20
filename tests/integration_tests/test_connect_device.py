@@ -1,6 +1,6 @@
 import pytest
-from tests.models.response_models import GenericIsSuccessResponse
-from tests.test_helpers.test_helpers import (
+from models.response_models import GenericIsSuccessResponse
+from test_helpers.test_helpers import (
     assert_response_success_status,
     validate_response,
 )

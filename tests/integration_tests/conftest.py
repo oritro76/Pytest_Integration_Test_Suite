@@ -1,8 +1,8 @@
 import pytest
 
-from tests.api_client.device_api_client import DeviceAPIClient
-from tests.random_data.random_data import RandomDataGenerator
-from tests.settings import APP_BASE_URL
+from api_client.device_api_client import DeviceAPIClient
+from random_data.random_data import RandomDataGenerator
+from settings import APP_BASE_URL
 
 @pytest.fixture(scope='function')
 def client():

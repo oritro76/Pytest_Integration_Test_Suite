@@ -4,9 +4,9 @@ import requests
 from typing import Optional, Dict, Any
 from urllib.parse import urlencode
 from requests import Response
-from tests.utils.utils import log_request, log_response
-from tests.test_helpers.test_helpers import assert_response_success_status
-from tests.random_data.random_data import RandomDataGenerator
+from utils.utils import log_request, log_response
+from test_helpers.test_helpers import assert_response_success_status
+from random_data.random_data import RandomDataGenerator
 
 
 class DeviceAPIClient:

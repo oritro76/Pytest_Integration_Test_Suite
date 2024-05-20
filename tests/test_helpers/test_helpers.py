@@ -1,8 +1,8 @@
 import pytest
 from typing import List, Tuple, Any, Generator, Union
 from requests import Response
-from tests.random_data.random_data import RandomDataGenerator
-from tests.utils.utils import generate_combinations
+from random_data.random_data import RandomDataGenerator
+from utils.utils import generate_combinations
 
 
 def assert_response_success_status(response: Response, success: bool = True) -> None:

@@ -1,6 +1,6 @@
 import pytest
-from tests.test_helpers.test_helpers import validate_response
-from tests.models.response_models import DevicesResponse
+from test_helpers.test_helpers import validate_response
+from models.response_models import DevicesResponse
 
 
 @pytest.mark.smoke

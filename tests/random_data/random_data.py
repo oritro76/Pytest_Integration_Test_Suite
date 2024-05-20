@@ -1,6 +1,6 @@
 from typing import Optional, Tuple, Union
 from faker import Faker
-from tests.device_settings.settings import MAX_BRIGHTNESS_LEVEL
+from device_settings.settings import MAX_BRIGHTNESS_LEVEL
 
 
 class RandomDataGenerator:

@@ -1,7 +1,7 @@
 import pytest
-from tests.integration_tests.conftest import random_data
-from tests.models.response_models import GenericIsSuccessResponse
-from tests.test_helpers.test_helpers import (
+from integration_tests.conftest import random_data
+from models.response_models import GenericIsSuccessResponse
+from test_helpers.test_helpers import (
     assert_response_success_status,
     validate_response,
     data_for_invalid_brightness_levels,
