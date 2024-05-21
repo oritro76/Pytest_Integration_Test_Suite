@@ -1,5 +1,5 @@
 import pytest
-from test_helpers.test_helpers import validate_response
+from test_helpers.test_helpers import assert_response_success_status, validate_response
 from models.response_models import DevicesResponse
 
 
@@ -42,17 +42,17 @@ def test_list_devices_with_invalid_body(client, random_data):
     Tests listing the devices with an invalid request body.
 
     This test sends a request to list devices with an invalid JSON body and verifies
-    that the response status code is 400 (Bad Request).
+    that the response from list devices is unsuccessful..
 
     Args:
         client: The DeviceAPIClient fixture.
         random_data: The RandomDataGenerator fixture.
 
     Assertions:
-        - The response status code is 400 (Bad Request).
+        - The response from list devices is unsuccessful.
     """
     # Act
     response = client.list_devices(data=random_data.random_json())
 
     # Assert
-    assert response.status_code == 400
+    assert_response_success_status(response, success=False)

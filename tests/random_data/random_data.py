@@ -40,8 +40,8 @@ class RandomDataGenerator:
             Tuple[Optional[Union[str, int]], ...]: A tuple containing various invalid names.
         """
         return (
-            "",
-            None,
+            "", 
+            None, 
             self.faker.pystr(min_chars=500, max_chars=600),
             "name_with_special_chars!@#",
             12345,

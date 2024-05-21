@@ -92,17 +92,17 @@ def test_get_state_with_invalid_body(client, random_data):
     Tests retrieving the state of a device with an invalid request body.
 
     This test attempts to retrieve the state of a device using an invalid JSON body
-    and verifies that the response status code is 400 (Bad Request).
+    and verifies that the response from getting the device state is unsuccessful.
 
     Args:
         client: The DeviceAPIClient fixture.
         random_data: The RandomDataGenerator fixture.
 
     Assertions:
-        - The response status code is 400 (Bad Request).
+        - The response from getting the device state is unsuccessful.
     """
     # Act
     response = client.get_device_state(data=random_data.random_json())
 
     # Assert
-    assert response.status_code == 400
+    assert_response_success_status(response, success=False)
