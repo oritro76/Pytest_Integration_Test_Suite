@@ -1,5 +1,5 @@
 import pytest
-from typing import List, Tuple, Any, Generator, Union
+from typing import List, Tuple, Any
 from requests import Response
 from random_data.random_data import RandomDataGenerator
 from utils.utils import generate_combinations
@@ -10,7 +10,7 @@ def assert_response_success_status(response: Response, success: bool = True) -> 
     isSuccess = response.json()
     assert isSuccess.get("success") == success
 
-def data_for_invalid_names() -> Generator[Tuple[str, Union[str, None, int]], None, None]:
+def data_for_invalid_names() -> List[Tuple[Any, ...]]:
     random_data = RandomDataGenerator()
     return generate_combinations(
         [

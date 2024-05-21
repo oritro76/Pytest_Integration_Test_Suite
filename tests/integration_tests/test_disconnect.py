@@ -8,22 +8,49 @@ from test_helpers.test_helpers import (
 
 @pytest.mark.smoke
 def test_disconnect(client):
-    #arrange
+    """
+    Tests disconnecting from a connected device.
+
+    This test connects to a random device, attempts to disconnect from it,
+    and verifies that the disconnection is successful.
+
+    Args:
+        client: The DeviceAPIClient fixture.
+
+    Assertions:
+        - The response from disconnecting from the device matches the expected response model.
+        - The response from disconnecting from the device is successful.
+    """
+    # Arrange
     client.connect_to_a_random_device()
 
-    #act
+    # Act
     response = client.disconnect_device()
 
-    #assert
+    # Assert
     validate_response(model=GenericIsSuccessResponse, response=response)
     assert_response_success_status(response)
 
+
 def test_disconnect_with_invalid_body(client, random_data):
-    #arrange
+    """
+    Tests disconnecting from a device with an invalid request body.
+
+    This test connects to a random device, attempts to disconnect from it using
+    an invalid JSON body, and verifies that the response status code is 400 (Bad Request).
+
+    Args:
+        client: The DeviceAPIClient fixture.
+        random_data: The RandomDataGenerator fixture.
+
+    Assertions:
+        - The response status code is 400 (Bad Request).
+    """
+    # Arrange
     client.connect_to_a_random_device()
 
-    #act
+    # Act
     response = client.disconnect_device(data=random_data.random_json())
-    
-    #assert
+
+    # Assert
     assert response.status_code == 400
