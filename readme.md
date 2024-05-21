@@ -84,7 +84,9 @@ The test suite is modular, with each test file focusing on specific functionalit
 
 - POST /color API: Color param should accept 6 hex digits. Currently it accepts invalid hex digits also. Tests have been implemented for these checks and they are failing.
 
-- POST /chilltime API: Chilltime API should mentions how the brightness will decrease untill it reaches the 30% in the specs.
+- POST /brightness API: Brightness value should only accept Float. And the floating point precession should be disucessed and documented in the API doc or in the requirements.
+
+- POST /chilltime API: Chilltime API should mentions how the brightness will decrease untill it reaches the 30% in the requirements. 
 
 ### Bugs and Testcases
 - 5 Bugs are reported in bugs.md file
