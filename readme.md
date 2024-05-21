@@ -72,11 +72,11 @@ The test suite is modular, with each test file focusing on specific functionalit
 - Isolation: Tests are isolated from each other, ensuring that they do not interfere with one another and providing reliable test results.
 - Logging and Debugging: All APIs requests and responses are logged for better debuggin purpose
 
-- Dockerization: Two docker containers are used for test execution. One to have light bulb web server and another to execute the tests. 
+- Dockerization: Two docker containers are used for test execution. One to have light bulb web server and another to execute the tests. Using dockerization will help in faster development and test execution for running tests locally and also in a pipeline.
 
 - Reporting: Reporting with pytest-html generates comprehensive HTML reports with detailed test information, provides a user-friendly visual representation of test results, allows inclusion of additional information in the report, links test cases with specific issues or requirements, and enables storage and analysis of historical test results.
 
-- Marker: One test marker SMOKE is introduced for running the smoke tests.
+- Marker: One test marker SMOKE is introduced for running the smoke tests. By using markers we can separate the test runs and get meaningful results.
 
 ## Points for discussion:
 
@@ -98,7 +98,7 @@ docker compose build
 docker compose up
 ```
 
-Currently only the 16 smoke tests will run. To run all the 70 tests remove `-m smoke` from the docker compose file and run the above commands. To see the reports go to `/tests/reports/` directory.
+There are 16 smoke tests and in total 70 tests. Currently all the 70 tests will run. To run only the smoke tests add `-m smoke` in the command section for the docker compose file and run the above commands. To see the reports go to `/tests/reports/` directory.
 
 ## Additional Testing Techniques
 - Load Testing: Ensure the application can handle a large number of requests and connected devices simultaneously.
